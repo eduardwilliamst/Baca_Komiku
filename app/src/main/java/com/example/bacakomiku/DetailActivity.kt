@@ -1,23 +1,21 @@
 package com.example.bacakomiku
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-
-class HomeActivity : AppCompatActivity() {
-
+class DetailActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var genreAdapter: GenreAdapter
     private lateinit var gridLayoutManager: GridLayoutManager
 
-    private val adapter = GenreAdapter()
+    private val adapter = DetailAdapter()
 
     companion object {
         private const val SPAN_COUNT_ONE = 1
@@ -26,12 +24,12 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_detail)
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
 
         gridLayoutManager = GridLayoutManager(this, SPAN_COUNT_ONE)
-        recyclerView = findViewById(R.id.recycler_view_activity)
+        recyclerView = findViewById(R.id.recycler_view_detail)
 
         recyclerView?.layoutManager = LinearLayoutManager(this)
         recyclerView?.adapter = adapter // Menggunakan adapter
@@ -75,7 +73,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun provideData(): List<GenreData> {
         val data = mutableListOf<GenreData>()
-        val genres = listOf("action", "comedy", "drama", "game", "romance")
+        val genres = listOf("action", "comedy", "drama")
         val infos = listOf("20 comen", "10 comen", "32 comen", "10 comen", "20 comen")
         val imgs = listOf("20 comen", "10 comen", "32 comen", "10 comen", "20 comen")
 
@@ -94,5 +92,4 @@ class HomeActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_home, menu)
         return true
     }
-
 }
