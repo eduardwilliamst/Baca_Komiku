@@ -1,18 +1,29 @@
-package com.example.bacakomiku
+package com.example.bacakomiku.fragment
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bacakomiku.DetailAdapter
+import com.example.bacakomiku.Global
+import com.example.bacakomiku.KomikData
+import com.example.bacakomiku.R
+import com.example.bacakomiku.databinding.FragmentDetailBinding
 
-class DetailActivity : AppCompatActivity() {
+class DetailFragment : Fragment() {
+
+    private var binding: FragmentDetailBinding? = null
+
     private lateinit var recyclerView: RecyclerView
     private lateinit var gridLayoutManager: GridLayoutManager
 
@@ -23,27 +34,30 @@ class DetailActivity : AppCompatActivity() {
         private const val SPAN_COUNT_THREE = 3
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentDetailBinding.inflate(inflater)
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
 
-        gridLayoutManager = GridLayoutManager(this, SPAN_COUNT_ONE)
-        recyclerView = findViewById(R.id.recycler_view_detail)
+        gridLayoutManager = GridLayoutManager(requireContext(), SPAN_COUNT_ONE)
+        recyclerView = requireView().findViewById(R.id.recycler_view_fragment_home)
 
-        recyclerView?.layoutManager = LinearLayoutManager(this)
-        recyclerView?.adapter = adapter
-
-        val intent: Intent = intent
-
-        adapter.updateData(provideData(intent))
-
-        val toolbar = findViewById<Toolbar>(R.id.toolbar_activity_detail)
-        setSupportActionBar(toolbar)
-
+        recyclerView.layoutManager = gridLayoutManager
+        recyclerView.adapter = adapter
+//
+//        val name = arguments?.getString(FragmentOne.EXTRA_NAME)
+//
+//        adapter.updateData(provideData(intent))
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -59,14 +73,13 @@ class DetailActivity : AppCompatActivity() {
     private fun switchLayout() {
         if (gridLayoutManager.spanCount == SPAN_COUNT_ONE) {
             gridLayoutManager.spanCount = SPAN_COUNT_THREE
-            recyclerView?.layoutManager = gridLayoutManager
+            recyclerView.layoutManager = gridLayoutManager
         } else {
             gridLayoutManager.spanCount = SPAN_COUNT_ONE
-            recyclerView?.layoutManager = LinearLayoutManager(this)
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
         adapter.notifyItemRangeChanged(0, adapter.itemCount)
     }
-
 
     private fun switchIcon(item: MenuItem) {
         if (gridLayoutManager.spanCount == SPAN_COUNT_THREE) {
@@ -76,7 +89,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun provideData(intent: Intent): List<KomikData> {
+    private fun provideData(intent : Intent): List<KomikData> {
         val data = mutableListOf<KomikData>()
         val tipe = intent.getStringExtra("tipe")
 
@@ -86,24 +99,23 @@ class DetailActivity : AppCompatActivity() {
             Log.d("MyApp", "Nilai tipe dari komik: ${komik.tipe}")
             if (tipe == komik.tipe) {
                 Log.d("MyApp", "Menambahkan data ke list")
-                data.add(KomikData(
+                data.add(
+                    KomikData(
                     tipe = komik.tipe,
                     title = komik.title,
                     info = komik.info,
                     img = komik.img,
                     link = komik.link
-                ))
+                )
+                )
             }
         }
 
         return data
     }
 
-
-
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_home, menu)
-        return true
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.menu_home, menu)
     }
 }

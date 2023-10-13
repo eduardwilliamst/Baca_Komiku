@@ -3,7 +3,6 @@ package com.example.bacakomiku
 import android.content.Intent
 import android.net.Uri
 import android.view.View
-import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView

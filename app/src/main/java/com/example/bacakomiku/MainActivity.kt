@@ -2,11 +2,10 @@ package com.example.bacakomiku
 
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import com.example.bacakomiku.fragment.FragmentActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,8 +24,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnFragment?.setOnClickListener{
-//            startActivity(Intent(this, FragmentActivity::class.java))
-            Toast.makeText(this, "Sorry, Will be Update Soon!", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, FragmentActivity::class.java))
+//            Toast.makeText(this, "Sorry, Will be Update Soon!", Toast.LENGTH_SHORT).show()
         }
 
     }

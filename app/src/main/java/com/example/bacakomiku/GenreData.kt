@@ -4,4 +4,6 @@ data class GenreData (
     val title: String,
     val info: String,
     val img: String,
-)
+) {
+    var intentFrag: String = ""
+}

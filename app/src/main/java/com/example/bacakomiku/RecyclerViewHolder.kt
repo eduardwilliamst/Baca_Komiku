@@ -1,10 +1,11 @@
 package com.example.bacakomiku
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerViewHolder(
@@ -16,6 +17,9 @@ class RecyclerViewHolder(
     private var info: AppCompatTextView? = null
     private var img: AppCompatImageView? = null
 
+    companion object {
+        const val EXTRA_TITLE = "title"
+    }
 
     private var img_grid_genre: AppCompatImageView? = null
     private var img_list_genre: AppCompatImageView? = null
@@ -36,13 +40,27 @@ class RecyclerViewHolder(
         img_list_genre?.setImageResource(imgResourceId)
 
         itemView.setOnClickListener {
-            val data = data.title
-            val intent = Intent(itemView.context, DetailActivity::class.java)
-            intent.action = Intent.ACTION_SEND
-            intent.putExtra("tipe", data)
-            intent.type = "text/plain"
-            itemView.context.startActivity(intent)
+
+            val fragment = data.intentFrag
+
+            val title = data.title
+
+            if (fragment == "yes"){
+                val bundle = Bundle()
+                bundle.putString(EXTRA_TITLE, title)
+
+                val navController = Navigation.findNavController(itemView)
+                navController.navigate(R.id.action_fragmentGenre_to_fragmentDetail)
+            } else {
+
+                val intent = Intent(itemView.context, DetailActivity::class.java)
+                intent.action = Intent.ACTION_SEND
+                intent.putExtra("tipe", title)
+                intent.type = "text/plain"
+                itemView.context.startActivity(intent)
 //            Toast.makeText(itemView.context, data, Toast.LENGTH_SHORT).show()
+            }
+
         }
 
     }

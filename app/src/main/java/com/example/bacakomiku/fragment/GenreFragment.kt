@@ -1,17 +1,25 @@
-package com.example.bacakomiku
+package com.example.bacakomiku.fragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bacakomiku.GenreAdapter
+import com.example.bacakomiku.GenreData
+import com.example.bacakomiku.R
+import com.example.bacakomiku.databinding.FragmentGenreBinding
 
+class GenreFragment : Fragment() {
 
-class HomeActivity : AppCompatActivity() {
+    private var binding: FragmentGenreBinding? = null
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var gridLayoutManager: GridLayoutManager
@@ -23,23 +31,27 @@ class HomeActivity : AppCompatActivity() {
         private const val SPAN_COUNT_THREE = 3
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentGenreBinding.inflate(inflater)
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
 
-        gridLayoutManager = GridLayoutManager(this, SPAN_COUNT_ONE)
-        recyclerView = findViewById(R.id.recycler_view_activity)
+        gridLayoutManager = GridLayoutManager(requireContext(), SPAN_COUNT_ONE)
+        recyclerView = requireView().findViewById(R.id.recycler_view_fragment_home)
 
-        recyclerView?.layoutManager = LinearLayoutManager(this)
-        recyclerView?.adapter = adapter // Menggunakan adapter
+        recyclerView.layoutManager = gridLayoutManager
+        recyclerView.adapter = adapter
         adapter.updateData(provideData())
-
-        val toolbar = findViewById<Toolbar>(R.id.toolbar_activity_home)
-        setSupportActionBar(toolbar)
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -55,14 +67,13 @@ class HomeActivity : AppCompatActivity() {
     private fun switchLayout() {
         if (gridLayoutManager.spanCount == SPAN_COUNT_ONE) {
             gridLayoutManager.spanCount = SPAN_COUNT_THREE
-            recyclerView?.layoutManager = gridLayoutManager
+            recyclerView.layoutManager = gridLayoutManager
         } else {
             gridLayoutManager.spanCount = SPAN_COUNT_ONE
-            recyclerView?.layoutManager = LinearLayoutManager(this)
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
         adapter.notifyItemRangeChanged(0, adapter.itemCount)
     }
-
 
     private fun switchIcon(item: MenuItem) {
         if (gridLayoutManager.spanCount == SPAN_COUNT_THREE) {
@@ -83,15 +94,17 @@ class HomeActivity : AppCompatActivity() {
             val info = infos[i]
             val img = imgs[i]
             val genreItem = GenreData(genre, info, img)
+            genreItem.intentFrag = "yes"
             data.add(genreItem)
         }
+
+        data.reverse()
 
         return data
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_home, menu)
-        return true
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.menu_home, menu)
     }
-
 }

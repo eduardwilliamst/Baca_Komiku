@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/fragmentGenre">
+
+    <fragment
+        android:id="@+id/fragmentGenre"
+        android:name="com.example.bacakomiku.fragment.GenreFragment"
+        android:label="FragmentGenre">
+        <action
+            android:id="@+id/action_fragmentGenre_to_fragmentDetail"
+            app:destination="@id/fragmentDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentDetail"
+        android:name="com.example.bacakomiku.fragment.DetailFragment"
+        android:label="FragmentDetail"></fragment>
+</navigation>
