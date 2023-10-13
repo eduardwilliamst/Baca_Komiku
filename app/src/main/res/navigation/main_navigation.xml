@@ -15,5 +15,10 @@
     <fragment
         android:id="@+id/fragmentDetail"
         android:name="com.example.bacakomiku.fragment.DetailFragment"
-        android:label="FragmentDetail"></fragment>
+        android:label="FragmentDetail">
+        <argument
+            android:name="title"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>

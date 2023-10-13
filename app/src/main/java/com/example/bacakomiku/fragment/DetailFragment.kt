@@ -1,6 +1,5 @@
 package com.example.bacakomiku.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +17,7 @@ import com.example.bacakomiku.DetailAdapter
 import com.example.bacakomiku.Global
 import com.example.bacakomiku.KomikData
 import com.example.bacakomiku.R
+import com.example.bacakomiku.RecyclerViewHolder
 import com.example.bacakomiku.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
@@ -49,14 +49,16 @@ class DetailFragment : Fragment() {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
 
         gridLayoutManager = GridLayoutManager(requireContext(), SPAN_COUNT_ONE)
-        recyclerView = requireView().findViewById(R.id.recycler_view_fragment_home)
+        recyclerView = requireView().findViewById(R.id.recycler_view_fragment_detail)
 
         recyclerView.layoutManager = gridLayoutManager
         recyclerView.adapter = adapter
-//
-//        val name = arguments?.getString(FragmentOne.EXTRA_NAME)
-//
-//        adapter.updateData(provideData(intent))
+
+
+//        val title = DetailFragmentArgs.fromBundle(arguments as Bundle).title
+        val title = arguments?.getString(RecyclerViewHolder.EXTRA_TITLE)
+        Log.d("MyApp", title.toString())
+        adapter.updateData(provideData(title ?: ""))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -89,15 +91,12 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun provideData(intent : Intent): List<KomikData> {
+    private fun provideData(title : String): List<KomikData> {
         val data = mutableListOf<KomikData>()
-        val tipe = intent.getStringExtra("tipe")
-
-        Log.d("MyApp", "Nilai tipe dari Intent: $tipe")
 
         for (komik in Global.dataKomik) {
             Log.d("MyApp", "Nilai tipe dari komik: ${komik.tipe}")
-            if (tipe == komik.tipe) {
+            if (title == komik.tipe) {
                 Log.d("MyApp", "Menambahkan data ke list")
                 data.add(
                     KomikData(

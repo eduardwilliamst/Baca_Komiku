@@ -2,11 +2,13 @@ package com.example.bacakomiku
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bacakomiku.fragment.GenreFragmentDirections
 
 class RecyclerViewHolder(
     private val itemView: View,
@@ -18,7 +20,7 @@ class RecyclerViewHolder(
     private var img: AppCompatImageView? = null
 
     companion object {
-        const val EXTRA_TITLE = "title"
+        const val EXTRA_TITLE = ""
     }
 
     private var img_grid_genre: AppCompatImageView? = null
@@ -49,8 +51,13 @@ class RecyclerViewHolder(
                 val bundle = Bundle()
                 bundle.putString(EXTRA_TITLE, title)
 
+                Log.d("MyApp", EXTRA_TITLE)
+
+                val actionToFragmentDetail = GenreFragmentDirections.actionFragmentGenreToFragmentDetail(title)
+                actionToFragmentDetail.title = title
+
                 val navController = Navigation.findNavController(itemView)
-                navController.navigate(R.id.action_fragmentGenre_to_fragmentDetail)
+                navController.navigate(R.id.action_fragmentGenre_to_fragmentDetail, bundle)
             } else {
 
                 val intent = Intent(itemView.context, DetailActivity::class.java)

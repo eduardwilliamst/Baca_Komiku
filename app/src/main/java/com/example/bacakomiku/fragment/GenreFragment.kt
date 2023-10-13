@@ -29,6 +29,7 @@ class GenreFragment : Fragment() {
     companion object {
         private const val SPAN_COUNT_ONE = 1
         private const val SPAN_COUNT_THREE = 3
+        const val EXTRA_TITLE = "title"
     }
 
     override fun onCreateView(
