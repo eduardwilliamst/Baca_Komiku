@@ -3,6 +3,7 @@ package com.example.bacakomiku
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
@@ -39,6 +40,26 @@ class HomeActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar_activity_home)
         setSupportActionBar(toolbar)
     }
+    private fun showSortByDialog() {
+        val sortOptions = arrayOf("A-Z", "Z-A")
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Sort By")
+        builder.setItems(sortOptions) { dialog, which ->
+            when (which) {
+                0 -> {
+                    val sortedData = provideData().sortedBy { it.title }
+                    adapter.updateData(sortedData)
+                }
+                1 -> {
+
+                    val sortedData = provideData().sortedByDescending { it.title }
+                    adapter.updateData(sortedData)
+                }
+            }
+        }
+        builder.show()
+    }
+
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -47,6 +68,10 @@ class HomeActivity : AppCompatActivity() {
                 switchLayout()
                 switchIcon(item)
                 true
+            }
+            R.id.menu_sort_by -> {
+                showSortByDialog()
+                return true
             }
             else -> super.onOptionsItemSelected(item)
         }

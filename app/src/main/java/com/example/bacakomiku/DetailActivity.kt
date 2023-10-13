@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
@@ -45,12 +46,37 @@ class DetailActivity : AppCompatActivity() {
     }
 
 
+    private fun showSortByDialog() {
+        val sortOptions = arrayOf("A-Z", "Z-A")
+        val builder = AlertDialog.Builder(this)
+        val intent: Intent = intent
+
+        builder.setTitle("Sort By")
+        builder.setItems(sortOptions) { dialog, which ->
+            when (which) {
+                0 -> {
+                    val sortedData = provideData(intent).sortedBy { it.title }
+                    adapter.updateData(sortedData)
+                }
+                1 -> {
+                    val sortedData = provideData(intent).sortedByDescending { it.title }
+                    adapter.updateData(sortedData)
+                }
+            }
+        }
+        builder.show()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_switch_layout -> {
                 switchLayout()
                 switchIcon(item)
                 true
+            }
+            R.id.menu_sort_by -> {
+                showSortByDialog()
+                return true
             }
             else -> super.onOptionsItemSelected(item)
         }

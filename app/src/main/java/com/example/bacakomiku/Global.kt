@@ -37,7 +37,7 @@ object Global {
         KomikData("Slice of Life"," Tondemo Skill de Isekai Hourou Meshi ", "53 comen", "sol1","https://shinigami.sh/series/tondemo-skill-de-isekai-hourou-meshi/"),
         KomikData("Slice of Life"," King of The Mound ", "22 comen", "sol2","https://shinigami.sh/series/king-of-the-mound/"),
         KomikData("Slice of Life","\n" +
-                "Tensei Shitara dai Nana Ouji datta node, Kimama ni Majutsu o Kiwamemasu\n", "13 comen", "sol3","https://shinigami.sh/series/tensei-shitara-dai-nana-ouji-datta-node-kimama-ni-majutsu-o-kiwamemasu/"),
+                "Tensei Shitara dai Nana Ouji datta node\n", "13 comen", "sol3","https://shinigami.sh/series/tensei-shitara-dai-nana-ouji-datta-node-kimama-ni-majutsu-o-kiwamemasu/"),
         KomikData("Shounen"," The New Employee Kim Chul-Soo ", "92 comen", "shounen1","https://shinigami.sh/series/the-new-employee-kim-chul-soo/"),
         KomikData("Shounen"," Academy’s Undercover Professor ", "28 comen", "shounen2","https://shinigami.sh/series/academys-undercover-professor/"),
         KomikData("Shounen"," Hyper Luck ", "53 comen", "shounen3","https://shinigami.sh/series/hyper-luck/"),

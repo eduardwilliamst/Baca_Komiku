@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -54,6 +55,26 @@ class GenreFragment : Fragment() {
         adapter.updateData(provideData())
     }
 
+    private fun showSortByDialog() {
+        val sortOptions = arrayOf("A-Z", "Z-A")
+        val builder = AlertDialog.Builder(requireContext())
+
+        builder.setTitle("Sort By")
+        builder.setItems(sortOptions) { dialog, which ->
+            when (which) {
+                0 -> {
+                    val sortedData = provideData().sortedBy { it.title }
+                    adapter.updateData(sortedData)
+                }
+                1 -> {
+                    val sortedData = provideData().sortedByDescending { it.title }
+                    adapter.updateData(sortedData)
+                }
+            }
+        }
+        builder.show()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_switch_layout -> {
@@ -61,9 +82,14 @@ class GenreFragment : Fragment() {
                 switchIcon(item)
                 true
             }
+            R.id.menu_sort_by -> {
+                showSortByDialog()
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
+
 
     private fun switchLayout() {
         if (gridLayoutManager.spanCount == SPAN_COUNT_ONE) {
