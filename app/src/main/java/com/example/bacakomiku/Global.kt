@@ -1,0 +1,48 @@
+package com.example.bacakomiku
+
+object Global {
+
+    val dataKomik:Array<KomikData> = arrayOf(
+        KomikData("Action"," Return Of The Mount Hua Sect", "53 comen","action1","https://shinigami.sh/series/return-of-the-mount-hua-sect/"),
+        KomikData("Action"," SSS-Class Suicide Hunter", "22 comen","action2","https://shinigami.sh/series/sss-class-suicide-hunter/"),
+        KomikData("Action","Heavenly Inquisition Sword", "30 comen","action3","https://shinigami.sh/series/heavenly-inquisition-sword/"),
+        KomikData("Action","Lookism", "21 comen","action4","https://shinigami.sh/series/lookism/"),
+        KomikData("Action"," The Bully In-Charge", "63 comen","action5","https://shinigami.sh/series/the-bully-in-charge/"),
+        KomikData("Comedy","The Creator Is On Hiatus", "30 comen","comedy1","https://shinigami.sh/series/the-creator-is-on-hiatus/"),
+        KomikData("Comedy","The Return Of the Crazy Demon", "50 comen","comedy2","https://shinigami.sh/series/the-return-of-the-crazy-demon/"),
+        KomikData("Comedy"," Chainsaw Man", "69 comen","comedy3","https://shinigami.sh/series/chainsaw-man/"),
+        KomikData("Comedy"," Otherworldly Sword King’s Survival Records", "35 comen","comedy4","https://shinigami.sh/series/otherworldly-sword-kings-survival-records/"),
+        KomikData("Comedy"," One Punch Man ", "32 comen","comedy5","https://shinigami.sh/series/one-punch-man/"),
+        KomikData("Drama"," How To Fight", "53 comen","drama1","https://shinigami.sh/series/how-to-fight/"),
+        KomikData("Drama"," Be The Actor", "12 comen","drama2","https://shinigami.sh/series/be-the-actor/"),
+        KomikData("Drama"," Manager Kim", "45 comen","drama3","https://shinigami.sh/series/manager-kim/"),
+        KomikData("Drama"," Castle Season 2 ", "56 comen","drama4","https://shinigami.sh/series/castle-season-2/"),
+        KomikData("Drama"," Quest Supremacy ", "23 comen","drama5","https://shinigami.sh/series/quest-supremacy/"),
+        KomikData("Game"," Arcane Sniper ", "30 comen","game1","https://shinigami.sh/series/arcane-sniper-2/"),
+        KomikData("Game","Pick Me Up (Infinite Gacha)", "35 comen","game2","https://shinigami.sh/series/pick-me-up-infinite-gacha/"),
+        KomikData("Game"," Worn And Torn Newbie ", "30 comen","game3","https://shinigami.sh/series/worn-and-torn-newbie/"),
+        KomikData("Game"," +99 Wooden Reinforced Stick ", "30 comen","game4","https://shinigami.sh/series/99-wooden-reinforced-stick/"),
+        KomikData("Game","Game5", "30 comen","game5","https://shinigami.sh/series/leveling-up-by-only-eating/"),
+        KomikData("Romance"," My Office Noona’s Story ", "35 comen","romance1","https://shinigami.sh/series/my-office-noonas-story/"),
+        KomikData("Romance"," Kuroiwa Medaka ni Watashi no Kawaii ga Tsuujinai ", "32 comen","romance2","https://shinigami.sh/series/kuroiwa-medaka-ni-watashi-no-kawaii-ga-tsuujinai/"),
+        KomikData("Romance"," Amagami-san Chi no Enmusubi ", "54 comen","romance3","https://shinigami.sh/series/amagami-san-chi-no-enmusubi/"),
+        KomikData("Romance","Oshi no Ko", "12 comen","romance4","https://shinigami.sh/series/oshi-no-ko/"),
+        KomikData("Romance"," Megami no Kafeterasu ", "32 comen","romance5","https://shinigami.sh/series/megami-no-kafeterasu/"),
+        KomikData("Medical"," Medical Return ", "53 comen", "medical1","https://shinigami.sh/series/medical-return/"),
+        KomikData("Medical"," Perfect Surgeon ", "12 comen", "medical2","https://shinigami.sh/series/perfect-surgeon/"),
+        KomikData("Medical"," Level-Up Doctor ", "42 comen", "medical3","https://shinigami.sh/series/level-up-doctor/"),
+        KomikData("Adventure"," The Greatest Estate Developer ", "153 comen", "adventure1","https://shinigami.sh/series/the-greatest-estate-developer/"),
+        KomikData("Adventure"," The Lord’s Coins Aren’t Decreasing? ", "33 comen", "adventure2","https://shinigami.sh/series/the-lords-coins-arent-decreasing/"),
+        KomikData("Adventure"," The S-Classes That I Raised ", "32 comen", "adventure3","https://shinigami.sh/series/the-s-classes-that-i-raised/"),
+        KomikData("Slice of Life"," Tondemo Skill de Isekai Hourou Meshi ", "53 comen", "sol1","https://shinigami.sh/series/tondemo-skill-de-isekai-hourou-meshi/"),
+        KomikData("Slice of Life"," King of The Mound ", "22 comen", "sol2","https://shinigami.sh/series/king-of-the-mound/"),
+        KomikData("Slice of Life","\n" +
+                "Tensei Shitara dai Nana Ouji datta node, Kimama ni Majutsu o Kiwamemasu\n", "13 comen", "sol3","https://shinigami.sh/series/tensei-shitara-dai-nana-ouji-datta-node-kimama-ni-majutsu-o-kiwamemasu/"),
+        KomikData("Shounen"," The New Employee Kim Chul-Soo ", "92 comen", "shounen1","https://shinigami.sh/series/the-new-employee-kim-chul-soo/"),
+        KomikData("Shounen"," Academy’s Undercover Professor ", "28 comen", "shounen2","https://shinigami.sh/series/academys-undercover-professor/"),
+        KomikData("Shounen"," Hyper Luck ", "53 comen", "shounen3","https://shinigami.sh/series/hyper-luck/"),
+        KomikData("Murim"," Chronicles of the Demon Faction ", "67 comen", "murim1","https://shinigami.sh/series/chronicles-of-the-demon-faction/"),
+        KomikData("Murim"," Absolute Sword Sense ", "55 comen", "murim2","https://shinigami.sh/series/absolute-sword-sense/"),
+        KomikData("Murim"," In The Night Consumed By Blades, I Walk ", "43 comen", "murim3","https://shinigami.sh/series/in-the-night-consumed-by-blades-i-walk/"),
+    )
+}

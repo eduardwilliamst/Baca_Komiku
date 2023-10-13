@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var genreAdapter: GenreAdapter
     private lateinit var gridLayoutManager: GridLayoutManager
 
     private val adapter = GenreAdapter()
@@ -75,9 +74,9 @@ class HomeActivity : AppCompatActivity() {
 
     private fun provideData(): List<GenreData> {
         val data = mutableListOf<GenreData>()
-        val genres = listOf("action", "comedy", "drama", "game", "romance")
-        val infos = listOf("20 comen", "10 comen", "32 comen", "10 comen", "20 comen")
-        val imgs = listOf("20 comen", "10 comen", "32 comen", "10 comen", "20 comen")
+        val genres = listOf("Action", "Comedy", "Drama", "Game", "Romance", "Adventure", "Medical", "Shounen", "Slice of Life", "Murim")
+        val infos = listOf("5 komik", "5 komik", "5 komik", "5 komik", "5 komik", "3 Komik", "3 Komik", "3 Komik", "3 Komik", "3 Komik")
+        val imgs = listOf("action1", "comedy1", "drama1", "game1", "romance1","adventure1", "medical1", "shounen1", "sol1", "murim1")
 
         for (i in genres.indices) {
             val genre = genres[i]

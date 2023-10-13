@@ -2,6 +2,7 @@ package com.example.bacakomiku
 
 import android.content.Intent
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,9 @@ class RecyclerViewHolder(
     private var title_list: AppCompatTextView? = null
     private var title_grid: AppCompatTextView? = null
     private var info: AppCompatTextView? = null
+    private var img: AppCompatImageView? = null
+
+
     private var img_grid_genre: AppCompatImageView? = null
     private var img_list_genre: AppCompatImageView? = null
 
@@ -27,26 +31,18 @@ class RecyclerViewHolder(
         title_grid?.text = data.title
         info?.text = data.info
 
-        if (data.title == "action") {
-            img_list_genre?.setImageResource(R.drawable.action1)
-            img_grid_genre?.setImageResource(R.drawable.action1)
-        } else if (data.title == "comedy") {
-            img_list_genre?.setImageResource(R.drawable.comedy1)
-            img_grid_genre?.setImageResource(R.drawable.comedy1)
-        } else if (data.title == "drama") {
-            img_list_genre?.setImageResource(R.drawable.drama1)
-            img_grid_genre?.setImageResource(R.drawable.drama1)
-        } else if (data.title == "romance") {
-            img_list_genre?.setImageResource(R.drawable.romance1)
-            img_grid_genre?.setImageResource(R.drawable.romance1)
-        } else if (data.title == "game") {
-            img_list_genre?.setImageResource(R.drawable.game1)
-            img_grid_genre?.setImageResource(R.drawable.game1)
-        }
+        val imgResourceId = itemView.context.resources.getIdentifier(data.img, "drawable", itemView.context.packageName)
+        img_grid_genre?.setImageResource(imgResourceId)
+        img_list_genre?.setImageResource(imgResourceId)
 
         itemView.setOnClickListener {
+            val data = data.title
             val intent = Intent(itemView.context, DetailActivity::class.java)
+            intent.action = Intent.ACTION_SEND
+            intent.putExtra("tipe", data)
+            intent.type = "text/plain"
             itemView.context.startActivity(intent)
+//            Toast.makeText(itemView.context, data, Toast.LENGTH_SHORT).show()
         }
 
     }

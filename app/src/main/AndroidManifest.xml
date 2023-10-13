@@ -19,7 +19,7 @@
             android:name=".DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".FragmentActivity"
+            android:name=".fragment.FragmentActivity"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"

@@ -1,9 +1,13 @@
 package com.example.bacakomiku
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
-    private lateinit var genreAdapter: GenreAdapter
     private lateinit var gridLayoutManager: GridLayoutManager
 
     private val adapter = DetailAdapter()
@@ -32,11 +35,15 @@ class DetailActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recycler_view_detail)
 
         recyclerView?.layoutManager = LinearLayoutManager(this)
-        recyclerView?.adapter = adapter // Menggunakan adapter
-        adapter.updateData(provideData())
+        recyclerView?.adapter = adapter
+
+        val intent: Intent = intent
+
+        adapter.updateData(provideData(intent))
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+
     }
 
 
@@ -71,22 +78,31 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun provideData(): List<GenreData> {
-        val data = mutableListOf<GenreData>()
-        val genres = listOf("action", "comedy", "drama")
-        val infos = listOf("20 comen", "10 comen", "32 comen", "10 comen", "20 comen")
-        val imgs = listOf("20 comen", "10 comen", "32 comen", "10 comen", "20 comen")
+    private fun provideData(intent: Intent): List<KomikData> {
+        val data = mutableListOf<KomikData>()
+        val tipe = intent.getStringExtra("tipe")
 
-        for (i in genres.indices) {
-            val genre = genres[i]
-            val info = infos[i]
-            val img = imgs[i]
-            val genreItem = GenreData(genre, info, img)
-            data.add(genreItem)
+        Log.d("MyApp", "Nilai tipe dari Intent: $tipe")
+
+        for (komik in Global.dataKomik) {
+            Log.d("MyApp", "Nilai tipe dari komik: ${komik.tipe}")
+            if (tipe == komik.tipe) {
+                Log.d("MyApp", "Menambahkan data ke list")
+                data.add(KomikData(
+                    tipe = komik.tipe,
+                    title = komik.title,
+                    info = komik.info,
+                    img = komik.img,
+                    link = komik.link
+                ))
+            }
         }
 
         return data
     }
+
+
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_home, menu)
